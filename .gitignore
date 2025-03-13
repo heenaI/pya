@@ -19,6 +19,7 @@ yarn-error.log
 *.launch
 .settings/
 *.sublime-workspace
+.editorconfig
 
 # Visual Studio Code
 .vscode/*
@@ -27,6 +28,7 @@ yarn-error.log
 !.vscode/launch.json
 !.vscode/extensions.json
 .history/*
+.vscode/
 
 # Miscellaneous
 /.angular/cache
@@ -40,3 +42,48 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# === Python & FastAPI ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+logs/
+*.log
+
+# Virtual environment
+venv/
+.env
+.env.local
+.env.*    # Ignore all env variants except a sample
+!.env.example  # Keep an example file for reference
+
+# === Alembic (Database Migrations) ===
+backend/migrations/versions/*.py
+
+# === Docker ===
+*.dockerignore
+docker-compose.override.yml
+pgdata/  # Ignore PostgreSQL data volume
+
+# === PostgreSQL ===
+*.sqlite3
+*.db
+db_data/
+
+# === Node.js & Angular ===
+node_modules/
+dist/
+build/
+.angular/
+
+# === VS Code & JetBrains IDEs ===
+.vscode/
+.idea/
+*.iml
+
+# === Jupyter Notebooks (if used) ===
+.ipynb_checkpoints/
+roadmap.txt
+
+backend/config/

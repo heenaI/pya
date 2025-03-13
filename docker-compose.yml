@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: liebkreis_db
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: liebkreis_backend
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - db
+    ports:
+      - "8000:8000"
+
+  # frontend:
+  #   build: ./frontend
+  #   container_name: liebkreis_frontend
+  #   restart: always
+  #   depends_on:
+  #     - backend
+  #   ports:
+  #     - "4200:4200"
+
+volumes:
+  postgres_data:
