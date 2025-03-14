@@ -1,3 +1,4 @@
+from datetime import timedelta
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
@@ -6,7 +7,7 @@ from services.google_auth import get_google_auth_url, exchange_code_for_token
 from models import User
 import logging
 import jwt
-
+from services.security import create_access_token
 router = APIRouter()
 
 @router.get("/")
@@ -42,4 +43,7 @@ async def callback(request: Request, code: str, db: Session = Depends(get_db)):
         db.add(user)
         db.commit()
 
-    return {"status": "success", "message": "User logged in successfully"}
+    user_data = {"email": user.email, "name": user.name}
+    access_token = create_access_token(data=user_data , expires_delta=timedelta(hours=1))
+
+    return {"status": "success", "user": user_data , "access_token": access_token, "token_type": "bearer"}

@@ -87,3 +87,6 @@ build/
 roadmap.txt
 
 backend/config/
+backend/.venv/
+.editorconfig
+package-lock.json

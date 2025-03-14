@@ -13,7 +13,7 @@ ENV PYTHONPATH=/app
 # Install dependencies
 RUN apt-get update
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir fastapi uvicorn openai google-auth google-auth-oauthlib sqlalchemy alembic psycopg2-binary dotenv google-auth-httplib2 google-api-python-client pyjwt
+    pip install --no-cache-dir fastapi uvicorn openai google-auth google-auth-oauthlib sqlalchemy alembic psycopg2-binary dotenv google-auth-httplib2 google-api-python-client pyjwt python-jose
 
 # Expose the FastAPI port
 EXPOSE 8000
