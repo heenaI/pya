@@ -7,9 +7,13 @@ from dotenv import load_dotenv
 # Load environment variables from .env
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL")
 
+
+DATABASE_URL = os.getenv("DATABASE_URL_DOCKER") # Connect to the database
+
+# Create the engine
 engine = create_engine(DATABASE_URL)
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 

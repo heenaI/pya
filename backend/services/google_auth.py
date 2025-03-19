@@ -6,7 +6,7 @@ import json
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CLIENT_SECRET_FILE = os.path.abspath(os.path.join(BASE_DIR, "..", "config", "client_sec.json"))
-REDIRECT_URI = "http://localhost:8000/auth/callback"
+
 # print(f"CLIENT_SECRET_FILE: {CLIENT_SECRET_FILE}")
 
 try:
@@ -18,18 +18,15 @@ except Exception as e:
 
 flow = Flow.from_client_secrets_file(
     CLIENT_SECRET_FILE,
-    scopes=["https://www.googleapis.com/auth/calendar.readonly", 
-            "openid", 
-            "https://www.googleapis.com/auth/userinfo.email",
-            "https://www.googleapis.com/auth/userinfo.profile"],
-    redirect_uri=REDIRECT_URI,
+    scopes=settings.GOOGLE_SCOPES,
+    redirect_uri=settings.GOOGLE_REDIRECT_URI,
 )
 
 def get_google_auth_url():
-    auth_url, _ = flow.authorization_url(prompt="consent", access_type='offline', include_granted_scopes='true')
+    auth_url, _ = flow.authorization_url(prompt="consent", access_type='offline',)
     return auth_url
 
-def exchange_code_for_token(code):
+def exchange_code_for_token(code: str):
     try:
         flow.fetch_token(code=code)
         return flow.credentials

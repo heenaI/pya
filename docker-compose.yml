@@ -1,7 +1,6 @@
-version: "3.8"
 
 services:
-  db:
+  liebkreis_db:
     image: postgres:15
     container_name: liebkreis_db
     restart: always
@@ -12,14 +11,15 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  backend:
+
+  liebkreis_backend:
     build: ./backend
     container_name: liebkreis_backend
     restart: always
     env_file:
       - .env
     depends_on:
-      - db
+      - liebkreis_db
     ports:
       - "8000:8000"
 
@@ -33,4 +33,4 @@ services:
   #     - "4200:4200"
 
 volumes:
-  postgres_data:
+  postgres_data:  {}  

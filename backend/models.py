@@ -26,6 +26,7 @@ class User(Base):
     family_id = Column(Integer, ForeignKey("family.id", ondelete="CASCADE"), index=True)
     family = relationship("Family", back_populates="members")
     google_token = Column(String, nullable=True)
+    refresh_token = Column(String, nullable=True)
 
 
 # Preferences Table

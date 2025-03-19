@@ -17,22 +17,23 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 load_dotenv()
 
 # Get database URL from .env
-DATABASE_URL = os.getenv("DATABASE_URL")
-SQLALCHEMY_URL = os.getenv("SQLALCHEMY_URL")
+DATABASE_URL = os.getenv("DATABASE_URL_DOCKER")
+# SQLALCHEMY_URL = os.getenv("SQLALCHEMY_URL")
 
 # Ensure DATABASE_URL is loaded
 if not DATABASE_URL:
     raise ValueError("DATABASE_URL is not set in the .env file!")
 
-if not SQLALCHEMY_URL:
-    raise ValueError("SQLALCHEMY_URL is not set in the .env file!")
+# if not SQLALCHEMY_URL:
+#     raise ValueError("SQLALCHEMY_URL is not set in the .env file!")
 
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
 config.set_main_option("sqlalchemy.url", DATABASE_URL)
-config.set_main_option("sqlalchemy.url", SQLALCHEMY_URL)
+
+
 
 
 # Interpret the config file for Python logging.
