@@ -54,9 +54,9 @@ async def callback(request: Request, code: str, db: Session = Depends(get_db)):
         db.commit()
 
     user_data = {"email": user.email, "name": user.name, "google_token":user.google_token, "refresh_token": user.refresh_token}
-    access_token = create_access_token(data=user_data)
+    JWT_access_token = create_access_token(data=user_data)
 
-    return {"status": "success", "user": user_data , "access_token": access_token, "token_type": "bearer"}
+    return {"status": "success", "user": user_data , "JWT_access_token": JWT_access_token, "token_type": "bearer"}
 
 @router.get("/protected-route")
 async def protected_route(current_user: User = Depends(get_current_user)):

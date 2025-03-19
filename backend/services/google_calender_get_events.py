@@ -24,7 +24,7 @@ def get_google_calendar_events(user: User, db: Session):
                                 "openid", 
                                 "https://www.googleapis.com/auth/userinfo.email", 
                                 "https://www.googleapis.com/auth/userinfo.profile"])
-    print(f"User token: {creds.refresh_token}")
+
 
     if creds.expired and creds.refresh_token is None:
         try:
@@ -36,8 +36,6 @@ def get_google_calendar_events(user: User, db: Session):
         except Exception as e:
             print(f"An error occurred while refreshing the token: {e}")
             return {"error": "Failed to refresh token"}
-    
-    print(f"User token  updated: {creds.refresh_token}")
 
 
 
@@ -80,11 +78,9 @@ def get_google_calendar_events(user: User, db: Session):
         events = events_result.get("items", [])
 
         if not events:
-            print("No upcoming events found.")
-            return
+            
+            return {"message": "No upcoming events found"}
 
-        # Prints the start and name of the next 10 events
-        print("Upcoming events:", [event["summary"] for event in events])
         return events
 
 
