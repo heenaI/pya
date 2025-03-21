@@ -12,9 +12,9 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
 
-  liebkreis_backend:
+  pya_backend:
     build: ./backend
-    container_name: liebkreis_backend
+    container_name: pya_backend
     restart: always
     env_file:
       - .env
@@ -23,14 +23,14 @@ services:
     ports:
       - "8000:8000"
 
-  # frontend:
-  #   build: ./frontend
-  #   container_name: liebkreis_frontend
-  #   restart: always
-  #   depends_on:
-  #     - backend
-  #   ports:
-  #     - "4200:4200"
+  frontend:
+    build: ./frontend
+    container_name: pya_frontend
+    restart: always
+    depends_on:
+      - pya_backend
+    ports:
+      - "4200:4200"
 
 volumes:
   postgres_data:  {}  
